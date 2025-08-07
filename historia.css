@@ -1,0 +1,66 @@
+/* reset e fontes */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #111;
+  color: #f0f0f0;
+  overflow-x: hidden;
+}
+
+/* SPLASH */
+#splash {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: url('../images/intro-bg.jpg') center/cover no-repeat;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+.splash-content h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  white-space: nowrap;
+  border-right: .15em solid #f0f0f0;
+  overflow: hidden;
+}
+
+/* animações de digitação */
+@keyframes typing {
+  from { width: 0; }  
+  to { width: 100%; }
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Após splash, oculta o main até finalizar */
+.hidden { visibility: hidden; }
+
+/* MEMORY SECTIONS */
+.memory {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.memory.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.memory h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #e03e2d;
+}
+.memory p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.memory img {
+  max-width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}

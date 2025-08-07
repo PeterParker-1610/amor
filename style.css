@@ -1,0 +1,262 @@
+/* --- Intro Splash --- */
+#intro {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('images/intro-bg.jpg') center/cover no-repeat;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#intro .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(13,27,42,0.7);
+}
+
+.intro-content {
+  position: relative;
+  padding: 2rem;
+  text-align: center;
+  max-width: 90%;
+}
+
+#intro-text {
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 2.5rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 4px solid #f0f0f0;
+  max-width: 0;
+  animation:
+    typing 4s steps(40) forwards,
+    blink 0.75s step-end infinite 4s;
+}
+
+/* Typewriter */
+@keyframes typing {
+  from { max-width: 0; }
+  to   { max-width: 100%; }
+}
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50%      { border-color: #f0f0f0; }
+}
+
+/* Fade-out when terminar a intro */
+#intro.fade-out {
+  animation: fadeOut 1.2s forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* --- Ajuste no main para não ficar embaixo do splash --- */
+body.loaded nav,
+body.loaded main {
+  opacity: 1;
+  transition: opacity 0.6s ease-in;
+}
+nav, main {
+  opacity: 0;
+}
+
+/* AQUI vêm todo o seu CSS anterior (cores, layout, joguinho, etc.) */
+
+
+/* 1. VARIÁVEIS GLOBAIS */
+:root {
+  --red: #e62429;
+  --dark-blue: #0d1b2a;
+  --light-blue: #1b263b;
+  --accent: #f5a623;
+  --text-light: #f0f0f0;
+  --bg-gradient: linear-gradient(135deg, var(--light-blue), var(--dark-blue));
+  --font-main: 'Poppins', sans-serif;
+  --font-title: 'Bungee', cursive;
+}
+
+/* 2. RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-main);
+  color: var(--text-light);
+  background: var(--bg-gradient);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+h2 { font-family: var(--font-title); text-align: center; margin: 2rem 0; }
+.btn {
+  display: inline-block;
+  background: var(--red);
+  color: var(--text-light);
+  padding: .8rem 1.4rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: background .3s;
+}
+.btn:hover { background: var(--accent); }
+
+/* 3. NAVBAR */
+.navbar {
+  position: sticky; top:0; z-index:100;
+  background: rgba(13,27,42,0.9);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2rem;
+}
+.logo { font-family: var(--font-title); font-size: 1.6rem; color: var(--red); }
+.nav-links { list-style: none; display: flex; gap:1.5rem; }
+.nav-links li {
+  cursor: pointer;
+  padding: .5rem;
+  transition: color .3s, border-bottom .3s;
+}
+.nav-links li.active,
+.nav-links li:hover {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* 4. SEÇÕES */
+.tab-content { display: none; padding: 2rem; }
+.tab-content.active { display: block; }
+
+/* HOME HERO */
+.hero {
+  height: 80vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  background: url('images/hero-bg.jpg') center/cover no-repeat;
+  position: relative;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background: rgba(13,27,42,0.6);
+}
+.hero h1 {
+  position: relative; font-family: var(--font-title);
+  font-size: 3.5rem; color: var(--red);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+.hero p {
+  position: relative; margin:1rem 0; font-size:1.2rem;
+  max-width:600px;
+}
+@keyframes glow {
+  from { text-shadow:0 0 10px var(--red); }
+  to   { text-shadow:0 0 30px var(--accent); }
+}
+
+/* TIMELINE */
+.timeline {
+  display: flex; flex-direction: column; gap:1.5rem;
+  max-width:700px; margin:0 auto;
+}
+.timeline .item {
+  position: relative; padding:1rem 1.5rem; border-left:4px solid var(--red);
+  background: rgba(255,255,255,0.1); border-radius:6px;
+  transition: background .3s, transform .3s;
+}
+.timeline .item:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateX(5px);
+}
+.timeline .item .date {
+  position:absolute; left:-90px; top:1rem;
+  background:var(--accent); padding:.2rem .8rem;
+  border-radius:20px; font-weight:600; font-size:.9rem;
+}
+
+/* GALERIA */
+.gallery {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:1rem;
+}
+.gallery img {
+  width:100%; height: auto; border-radius:8px;
+  filter: grayscale(20%) brightness(0.9);
+  transition: transform .4s, filter .4s;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+  filter: grayscale(0) brightness(1);
+}
+
+/* JOGUINHO */
+.game-container {
+  display: flex; gap:2rem; flex-wrap: wrap; justify-content: center;
+  perspective:1000px; margin-bottom:1rem;
+}
+.game-card {
+  width:180px; height:260px; position:relative;
+  transform-style: preserve-3d; transition: transform .8s;
+  cursor: pointer;
+}
+.game-card .face {
+  position:absolute; inset:0; display:flex;
+  align-items:center; justify-content:center;
+  border-radius:12px; backface-visibility:hidden;
+  font-weight:600; font-size:1rem; padding:1rem; text-align:center;
+}
+.game-card .front {
+  background: var(--red);
+}
+.game-card .back {
+  background: var(--accent);
+  transform: rotateY(180deg);
+}
+.game-card.flipped { transform: rotateY(180deg); }
+
+/* PRESENTES */
+.present-list {
+  max-width:500px; margin:0 auto; list-style: none;
+}
+.present-list li {
+  background: rgba(255,255,255,0.1);
+  margin: .5rem 0; padding: .8rem 1rem; border-radius:6px;
+  display:flex; align-items:center; gap:.6rem;
+}
+.present-list li::before {
+  content:'🎁'; font-size:1.2rem;
+}
+
+/* FOOTER */
+footer {
+  text-align:center; padding:1rem;
+  background: rgba(13,27,42,0.9);
+  font-size:.9rem;
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+  .hero h1 { font-size:2.8rem; }
+  .nav-links { flex-wrap: wrap; justify-content: center; gap:1rem; }
+}
+
+.btn {
+  display: inline-block;       /* Garante comportamento de bloco para padding/largura */
+  text-decoration: none;       /* Remove sublinhado padrão */
+  opacity: 1 !important;       /* Força botão totalmente visível */
+  pointer-events: auto !important; /* Permite interações de clique */
+  cursor: pointer;             /* Mostra cursor de mãozinha */
+  position: relative;          /* Caso precise ajustar z-index */
+  z-index: 10;                 /* Traz o botão para frente, por cima de outras camadas */
+  
+  /* Seus demais estilos: cor, padding, borda, transições… */
+  background-color: #6a0000;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #990000;
+}
